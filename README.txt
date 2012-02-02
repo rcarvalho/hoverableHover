@@ -21,3 +21,27 @@ options:
 	beforeHide - callback before popup is hidden
 	afterHide - callback after popup is hidden
 
+
+styling and positioning:
+  In order to get your popup to show up in the right place you need to style
+  it properly and make sure that you position it properly.
+  
+  // sample css styling for popup
+  #hoverDialog {
+      border-radius: 5px;
+      display:none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 200px;
+      width: 300px;
+      background-color: white;
+      z-index: 1000;
+  }
+
+  // sample javascript to position popup
+  function positionPopup(elem){
+    $('#hoverDialog').css("left", $(elem).offset().left + 20);
+    $('#hoverDialog').css("top", $(elem).offset().top);
+  }
+  hoverableHover.init(".hoverableLink", {popup: '#hoverDialog', beforeShow: positionPopup });
