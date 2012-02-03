@@ -1,6 +1,6 @@
 hoverableHover
 
-requires: jQuery (but, it not a jQuery plugin itself)
+requires: jQuery 1.3+ (but, it not a jQuery plugin itself)
 
 description: Kind of like tooltips, but the element that pops can also be
 	hovered on and stays around while you're on it.  The element only gets
