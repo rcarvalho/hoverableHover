@@ -32,37 +32,35 @@ hoverableHover = {
 			timeout = 700;
 		}
 		hoverableHover.popup = popup;
-		$(selector).hover(
-			function(){
-				if($(popup).is(':visible')){
-					hoverableHover.hidePopup();
-				}
-				
-				hoverableHover.hoverElem = this;
-				
-				if(opts.beforeShow){
-					opts.beforeShow(this);
-				}
 
-				$(popup).show();
-
-				if(opts.afterShow){
-					opts.afterShow(this);
-				}				
-			},
-			function(){
-				hoverableHover.startTimeout(timeout);
+		$(selector).live('mouseover', function(){
+			if($(popup).is(':visible')){
+				hoverableHover.hidePopup();
 			}
-		);
-
-		$(popup).hover(
-			function(){
-				hoverableHover.cancelTimeout();
-			},
-			function(){
-				hoverableHover.startTimeout(timeout);	
+			
+			hoverableHover.hoverElem = this;
+			
+			if(opts.beforeShow){
+				opts.beforeShow(this);
 			}
-		);
+
+			$(popup).show();
+
+			if(opts.afterShow){
+				opts.afterShow(this);
+			}				
+		});
+		$(selector).live('mouseout',function(){
+			hoverableHover.startTimeout(timeout);
+		});
+
+		$(popup).live('mouseover', function(){
+			hoverableHover.cancelTimeout();
+		});
+		
+		$(popup).live('mouseout', function(){
+			hoverableHover.startTimeout(timeout);	
+		});
 	},
 	cancelTimeout: function(){
 		if(hoverableHover.timeoutToken){
@@ -83,4 +81,4 @@ hoverableHover = {
 			hoverableHover.opts.afterHide(hoverableHover.hoverElem);
 		}
 	}
-}
+};
